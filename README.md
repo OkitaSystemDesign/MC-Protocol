@@ -2,51 +2,76 @@
 三菱 シーケンサの通信プロトコル MCプロトコル を使ってPythonからデバイスの値を読み書きする
 
 # mcp.py
-OMRON FINS protocol UDP connection  
-Memory Area Read Write
+Mitsubishi MC Protocol Frame3E UDP/IP connection  
+Device Read Write
 
 # Constructor
-fins(host, destFinsAddress, sorceFinsAddres)
+MCProtcol3E(host, port)
 
 # Functions
-### fins.read(memAddres, size)
-Memory Area Read  
-memAddress = D0-D32767, E0_0-EF_32767, W0-511, 0-6143  
+### .read(memAddres, size, unitOfBit)
+Device Area Read  
+memAddress = X, Y, M, L, F, V, B, D, W, TS, TC, TN, SS, SC, SN, CS, CC, CN, SB, SW, S ,DX, DY, SM, SD  
+size = 読出し点数
+unionOfBit = True ＝ ビット単位 / False = ワード単位  
 Return: bytes()
 
-### fins.write(memAddres, data)
+### .write(memAddres, data, bitSize)
 Memory Area Write  
-memAddress = D0-D32767, E0_0-EF_32767, W0-511, 0-6143  
+memAddress = X, Y, M, L, F, V, B, D, W, TS, TC, TN, SS, SC, SN, CS, CC, CN, SB, SW, S ,DX, DY, SM, SD  
 data = bytes()  
-Return: fins responce
+bitSize = ビット数（ビット単位で書込みするときのみ指定）  
+Return: responce
 
-### fins.toInt16(data)
+### .toBit(data)
+Convert to Bit data  
+### .toInt16(data)
 Convert to 16bit data  
-### fins.toInt32(data)
+### .toInt32(data)
 Convert to 32bit data  
-### fins.toInt64(data)
+### .toInt64(data)
 Convert to 64bit data  
-### fins.toUInt16(data)
+### .toUInt16(data)
 Convert to Unsigned 16bit data  
-### fins.toUInt32(data)
+### .toUInt32(data)
 Convert to Unsigned 32bit data  
-### fins.toUInt64(data)
+### .toUInt64(data)
 Convert to Unsigned 64bit data  
-### fins.toFloat(data)
+### .toFloat(data)
 Convert to Float data  
-### fins.toDouble(data)
+### .toDouble(data)
 Convert to Double data  
+### .toString(data)
+Convert to String data  
 
  return: list
  
 
 # Example
 ```
-finsudp = fins('192.168.250.1', '0.1.0', '0.10.0')
-data = finsudp.read('E0_30000", 10)
-print(finsudp.toInt16(data))
-rcv = finsudp.write('E0_0', data)
+mcp = MCProtcol3E('192.168.0.41', 4999)
+# words
+data = mcp.read('D0', 10)
+print(mcp.toInt16(data))        # convert int16
+rcv = mcp.write('D10', data)
+print(rcv)                      # normal recieve = 0x00 0x00
+
+# bits
+data = mcp.read('SM0', 8, True)
+print(mcp.toBin(data))          # convert bin
+rcv = mcp.write('M0', data, True)
 print(rcv)
+
+
+# numeric
+data = struct.pack('hhh', 123, 456, 789)
+rcv = mcp.write('D20', data)
+# float
+data = struct.pack('f', 1.23)
+rcv = mcp.write('D30', data)
+# bits
+data = [0x11, 0x11, 0x10]
+rcv = mcp.write('M10', data, 5)
 ```
 
 # Qiita記事
