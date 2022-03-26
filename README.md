@@ -12,9 +12,9 @@ MCProtcol3E(host, port)
 ### .read(memAddres, size, unitOfBit)
 Device Area Read  
 memAddress = X, Y, M, L, F, V, B, D, W, TS, TC, TN, SS, SC, SN, CS, CC, CN, SB, SW, S ,DX, DY, SM, SD  
-size = 読出し点数
+size = 読出し点数  
 unionOfBit = True ＝ ビット単位 / False = ワード単位  
-Return: bytes()
+Return: bytes()  
 
 ### .write(memAddres, data, bitSize)
 Memory Area Write  
