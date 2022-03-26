@@ -75,4 +75,4 @@ rcv = mcp.write('M10', data, 5)
 ```
 
 # Qiita記事
-https://qiita.com/OkitaSystemDesign/items/7a958388d16c162148b2
+https://qiita.com/OkitaSystemDesign/items/97b7d27c0d53668baafc
