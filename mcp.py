@@ -192,7 +192,8 @@ class MCProtcol3E:
 
 
     def toBin(self, data):
-        outdata = bin(int(data.hex(), 2))
+        #outdata = bin(int(data.hex(), 2))
+        outdata = format(int.from_bytes(data, 'little'), 'b')
 
         return outdata
 
@@ -272,34 +273,37 @@ class MCProtcol3E:
             s[i] = data[i+1]
             s[i+1] = data[i]
         
-        b = bytes(s).decode("utf-8").replace("\00","")
+        idx = s.index(0)
+        b = bytes(s[:idx]).decode("utf-8")
 
         return b
 
+if __name__ == "__main__":
 
-# example
-# set IPAddress,Port
-mcp = MCProtcol3E('192.168.0.41', 4999)
+    # example
+    # set IPAddress,Port
+    mcp = MCProtcol3E('192.168.0.41', 4999)
 
-# words
-data = mcp.read('D0', 10)
-print(mcp.toInt16(data))        # convert int16
-rcv = mcp.write('D10', data)
-print(rcv)                      # normal recieve = 0x00 0x00
+    # words
+    data = mcp.read('D0', 1)
+    print(mcp.toInt16(data))        # convert int16
+    rcv = mcp.write('D10', data)
+    print(rcv)                      # normal recieve = 0x00 0x00
 
-# bits
-data = mcp.read('SM0', 8, True)
-print(mcp.toBin(data))          # convert bin
-rcv = mcp.write('M0', data, True)
-print(rcv)
+    # bits
+    data = mcp.read('SM0', 8, True)
+    print(data)
+    print(mcp.toBin(data))          # convert bin
+    rcv = mcp.write('M0', data, True)
+    print(rcv)
 
 
-# numeric
-data = struct.pack('hhh', 123, 456, 789)
-rcv = mcp.write('D20', data)
-# float
-data = struct.pack('f', 1.23)
-rcv = mcp.write('D30', data)
-# bits
-data = [0x11, 0x11, 0x10]
-rcv = mcp.write('M10', data, 5)
+    # numeric
+    data = struct.pack('hhh', 123, 456, 789)
+    rcv = mcp.write('D20', data)
+    # float
+    data = struct.pack('f', 1.23)
+    rcv = mcp.write('D30', data)
+    # bits
+    data = [0x11, 0x11, 0x10]
+    rcv = mcp.write('M10', data, 5)
