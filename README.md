@@ -9,39 +9,39 @@ Device Read Write
 MCProtcol3E(host, port)
 
 # Functions
-### .read(memAddres, size, unitOfBit)
+### read(memAddres, size, unitOfBit)
 Device Area Read  
 memAddress = X, Y, M, L, F, V, B, D, W, TS, TC, TN, SS, SC, SN, CS, CC, CN, SB, SW, S ,DX, DY, SM, SD  
 size = 読出し点数  
 unionOfBit = True ＝ ビット単位 / False = ワード単位  
 Return: bytes()  
 
-### .write(memAddres, data, bitSize)
+### write(memAddres, data, bitSize)
 Memory Area Write  
 memAddress = X, Y, M, L, F, V, B, D, W, TS, TC, TN, SS, SC, SN, CS, CC, CN, SB, SW, S ,DX, DY, SM, SD  
 data = bytes()  
 bitSize = ビット数（ビット単位で書込みするときのみ指定）  
 Return: responce
 
-### .toBin(data)
+### toBin(data)
 Convert to Bit data  
-### .toInt16(data)
+### toInt16(data)
 Convert to 16bit data  
-### .toInt32(data)
+### toInt32(data)
 Convert to 32bit data  
-### .toInt64(data)
+### toInt64(data)
 Convert to 64bit data  
-### .toUInt16(data)
+### toUInt16(data)
 Convert to Unsigned 16bit data  
-### .toUInt32(data)
+### toUInt32(data)
 Convert to Unsigned 32bit data  
-### .toUInt64(data)
+### toUInt64(data)
 Convert to Unsigned 64bit data  
-### .toFloat(data)
+### toFloat(data)
 Convert to Float data  
-### .toDouble(data)
+### toDouble(data)
 Convert to Double data  
-### .toString(data)
+### toString(data)
 Convert to String data  
 
  return: list
