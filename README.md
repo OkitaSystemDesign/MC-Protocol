@@ -23,7 +23,7 @@ data = bytes()
 bitSize = ビット数（ビット単位で書込みするときのみ指定）  
 Return: responce
 
-### .toBit(data)
+### .toBin(data)
 Convert to Bit data  
 ### .toInt16(data)
 Convert to 16bit data  
