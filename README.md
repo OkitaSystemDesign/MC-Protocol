@@ -23,6 +23,28 @@ data = bytes()
 bitSize = ビット数（ビット単位で書込みするときのみ指定）  
 Return: responce
 
+### RandomRead(worddevice, dworddevice)
+Memory Area Random Read ワード単位、ダブルワード単位の不連続デバイスの読出し 
+memAddress = X, Y, M, L, F, V, B, D, W, TN, SN, CN, SB, SW, S ,DX, DY, SM, SD  
+worddevice = ワード読出しアドレス（カンマ区切り）  
+dworddvice = ダブルワード読出しアドレス（カンマ区切り）  
+Return: bytes()
+
+### MonitorSet(worddevice, dworddevice)
+Monitor registration モニタするデバイスを登録  
+memAddress = X, Y, M, L, F, V, B, D, W, TN, SN, CN, SB, SW, S ,DX, DY, SM, SD  
+worddevice = ワード読出しアドレス（カンマ区切り）  
+dworddvice = ダブルワード読出しアドレス（カンマ区切り）  
+Return: responce
+
+### MonitorGet(worddevice, dworddevice)
+Monitor 登録したデバイスの値を読み出す  
+memAddress = X, Y, M, L, F, V, B, D, W, TN, SN, CN, SB, SW, S ,DX, DY, SM, SD  
+worddevice = ワード読出しアドレス（カンマ区切り）  
+dworddvice = ダブルワード読出しアドレス（カンマ区切り）  
+Return: bytes()
+
+
 ### toBin(data)
 Convert to Bit data  
 ### toInt16(data)
