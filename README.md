@@ -37,7 +37,7 @@ worddevice = ワード読出しアドレス（カンマ区切り）
 dworddvice = ダブルワード読出しアドレス（カンマ区切り）  
 Return: responce
 
-### MonitorGet(worddevice, dworddevice)
+### MonitorGet()
 Monitor 登録したデバイスの値を読み出す  
 memAddress = X, Y, M, L, F, V, B, D, W, TN, SN, CN, SB, SW, S ,DX, DY, SM, SD  
 worddevice = ワード読出しアドレス（カンマ区切り）  
