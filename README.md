@@ -47,6 +47,8 @@ Return: bytes()
 
 ### toBin(data)
 Convert to Bit data  
+### WordToBin(data)
+Convert word data to Bit data  
 ### toInt16(data)
 Convert to 16bit data  
 ### toInt32(data)
