@@ -73,44 +73,50 @@ Convert to String data
 
 # Example
 ```
-    mcp = MCProtcol3E('192.168.0.41', 4999)
+# example
+# set IPAddress,Port
+mcp = MCProtcol3E('192.168.0.41', 4999)
 
-    # words
-    data = mcp.read('D10000', 1)
-    print(mcp.toInt16(data))        # convert int16
-    rcv = mcp.write('D10', data)
-    print(rcv)                      # normal recieve = 0x00 0x00
+# words
+data = mcp.read('D10000', 1)
+print(mcp.toInt16(data))        # convert int16
+rcv = mcp.write('D10', data)
+print(rcv)                      # normal recieve = 0x00 0x00
 
-    # bits
-    data = mcp.read('M8000', 8, True)
-    print(data)
-    print(mcp.toBin(data))          # convert bin
-    rcv = mcp.write('M100', data, 8)
-    print(rcv)
+# bits
+#data = mcp.read('M8000', 8, True)
+data = mcp.read('M0', 16, True)
+print(data)
+print(mcp.toBin(data))          # convert bin
+rcv = mcp.write('M100', data, 8)
+print(rcv)
 
-    # numeric
-    data = struct.pack('hhh', 123, 456, 789)
-    rcv = mcp.write('D20', data)
-    print(rcv)
-    # float
-    data = struct.pack('f', 1.23)
-    rcv = mcp.write('D10020', data)
-    print(rcv)
-    # bits
-    data = [0x11, 0x11, 0x10]
-    rcv = mcp.write('M8100', data, 5)
+data = mcp.read('D0', 1, False)
+print(mcp.WordToBin(data))          # convert bin
 
-    # RandomRead
-    rcv = mcp.RandomRead('D0,TN0,M100,X20', 'D1500,Y160,M1111')
-    print(rcv)
-    print(mcp.toInt16(rcv[:8]))
-    print(mcp.toInt32(rcv[8:]))
-    
-    # Monitor
-    data = mcp.MonitorSet('D50, D55', 'D60, D64')
-    rcv = mcp.MonitorGet()
-    print(mcp.toInt16(rcv[:4]))
-    print(mcp.toInt32(rcv[4:]))
+# numeric
+data = struct.pack('hhh', 123, 456, 789)
+rcv = mcp.write('D20', data)
+print(rcv)
+# float
+data = struct.pack('f', 1.23)
+rcv = mcp.write('D10020', data)
+print(rcv)
+# bits
+data = [0x11, 0x11, 0x10]
+rcv = mcp.write('M8100', data, 5)
+
+# RandomRead
+rcv = mcp.RandomRead('D0,TN0,M100,X20', 'D1500,Y160,M1111')
+print(rcv)
+print(mcp.toInt16(rcv[:8]))
+print(mcp.toInt32(rcv[8:]))
+
+# Monitor
+data = mcp.MonitorSet('D50, D55', 'D60, D64')
+rcv = mcp.MonitorGet()
+print(mcp.toInt16(rcv[:4]))
+print(mcp.toInt32(rcv[4:]))
 ```
 
 # Qiita記事
