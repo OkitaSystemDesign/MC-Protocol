@@ -296,7 +296,16 @@ class MCProtcol3E:
 
 
     def toBin(self, data):
-        outdata = bin(int(data.hex(), 2))
+        size = len(data) * 2
+        strBin = bin(int(data.hex(), 2))[2:]
+        outdata = (('0' * size) + strBin)[-size:]
+
+        return outdata
+
+    def WordToBin(self, data):
+        size = len(data) * 8
+        strBin = format(int.from_bytes(data, 'little'), 'b')
+        outdata = (('0' * (size)) + strBin) [-size:]
 
         return outdata
 
@@ -371,7 +380,7 @@ class MCProtcol3E:
         return outdata
 
     def toString(self, data):
-        s = [0]*len(data)
+        s = [0]*(len(data) + 1)
         for i in range(0, len(data), 2):
             s[i] = data[i+1]
             s[i+1] = data[i]
@@ -394,11 +403,15 @@ if __name__ == "__main__":
     print(rcv)                      # normal recieve = 0x00 0x00
 
     # bits
-    data = mcp.read('M8000', 8, True)
+    #data = mcp.read('M8000', 8, True)
+    data = mcp.read('M0', 16, True)
     print(data)
     print(mcp.toBin(data))          # convert bin
     rcv = mcp.write('M100', data, 8)
     print(rcv)
+
+    data = mcp.read('D0', 1, False)
+    print(mcp.WordToBin(data))          # convert bin
 
     # numeric
     data = struct.pack('hhh', 123, 456, 789)
