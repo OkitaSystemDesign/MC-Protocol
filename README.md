@@ -46,29 +46,39 @@ Return: bytes()
 
 
 ### toBin(data)
-Convert to Bit data  
+```
+data = mcp.read('M0', 16, True)  
+print(mcp.toBin(data))          # convert bin
+```
+unionOfBitをビット単位で指定して読み出した値を文字列に変換  
+(M0) 1000010011000010 (M15)
 ### WordToBin(data)
-Convert word data to Bit data  
+```
+data = mcp.read('D0', 1, False)
+print(mcp.WordToBin(data))          # convert word to bin
+```
+unionOfBitをワード単位で指定して読み出した値を文字列に変換  
+(15ビット目)  0100001100100001 (0ビット目)
 ### toInt16(data)
-Convert to 16bit data  
+読み出した値をInt16型のlistに変換    
 ### toInt32(data)
-Convert to 32bit data  
+読み出した値をInt32型のlistに変換    
 ### toInt64(data)
-Convert to 64bit data  
+読み出した値をInt64型のlistに変換    
 ### toUInt16(data)
-Convert to Unsigned 16bit data  
+読み出した値をUInt16型のlistに変換    
 ### toUInt32(data)
-Convert to Unsigned 32bit data  
+読み出した値をUInt32型のlistに変換    
 ### toUInt64(data)
-Convert to Unsigned 64bit data  
+読み出した値をUInt64型のlistに変換    
 ### toFloat(data)
+読み出した値を単精度浮動小数点型のlistに変換    
 Convert to Float data  
 ### toDouble(data)
-Convert to Double data  
+読み出した値を倍精度浮動小数点型のlistに変換    
 ### toString(data)
-Convert to String data  
+読み出した値を文字列に変換    
 
- return: list
  
 
 # Example
