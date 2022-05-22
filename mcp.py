@@ -397,7 +397,7 @@ if __name__ == "__main__":
     mcp = MCProtcol3E('192.168.0.41', 4999)
 
     # words
-    data = mcp.read('D10000', 1)
+    data = mcp.read('D10000', 2)
     print(mcp.toInt16(data))        # convert int16
     rcv = mcp.write('D10', data)
     print(rcv)                      # normal recieve = 0x00 0x00
@@ -411,7 +411,7 @@ if __name__ == "__main__":
     print(rcv)
 
     data = mcp.read('D0', 1, False)
-    print(mcp.WordToBin(data))          # convert bin
+    print(mcp.WordToBin(data))          # convert word to bin
 
     # numeric
     data = struct.pack('hhh', 123, 456, 789)
