@@ -85,7 +85,7 @@ Convert to Float data
 ```
 # example
 # set IPAddress,Port
-mcp = MCProtcol3E('192.168.0.41', 4999)
+mcp = MCProtcol3E('192.168.250.41', 4999)
 
 # words
 data = mcp.read('D10000', 1)
@@ -128,6 +128,8 @@ rcv = mcp.MonitorGet()
 print(mcp.toInt16(rcv[:4]))    # out> [50, 55]
 print(mcp.toInt32(rcv[4:]))    # out> [3997756, 4259904]
 ```
+# 説明サイト
+https://osdes.com/python/plccomm/mcprotocol.html
 
 # Qiita記事
 https://qiita.com/OkitaSystemDesign/items/97b7d27c0d53668baafc

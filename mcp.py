@@ -105,7 +105,6 @@ class MCProtcol3E:
 
         return ary
 
-
     def read(self, memaddr, readsize, unitOfBit = False):
         s = socket(AF_INET, SOCK_DGRAM)
         s.settimeout(2)
@@ -133,6 +132,7 @@ class MCProtcol3E:
 
         senddata = self.mcpheader(cmd) + cmd
         s.sendto(senddata, self.addr)
+        #print(senddata)
 
         res = s.recv(BUFSIZE)
         if res[9] == 0 and res[10] == 0:
@@ -141,6 +141,43 @@ class MCProtcol3E:
         else:
             return None
 
+    def readTCP(self, memaddr, readsize, unitOfBit = False):
+        s = socket(AF_INET, SOCK_STREAM)
+        s.settimeout(2)
+
+        s.connect(self.addr)
+
+        # MC Protocol
+        cmd = bytearray(10)
+        cmd[0] = 0x01                     # Read Command
+        cmd[1] = 0x04
+        if unitOfBit:
+            cmd[2] = 0x01                 # Sub Command
+            cmd[3] = 0x00
+        else:
+            cmd[2] = 0x00
+            cmd[3] = 0x00
+
+        deviceCode, memoffset = self.offset(memaddr)
+        cmd[4] = memoffset[0]             # head device
+        cmd[5] = memoffset[1]                     
+        cmd[6] = memoffset[2]
+        cmd[7] = deviceCode               # Device code
+
+        rsize = struct.pack("<H", readsize)
+        cmd[8] = rsize[0]                 # Number of device
+        cmd[9] = rsize[1]
+
+        senddata = self.mcpheader(cmd) + cmd
+        s.send(senddata)
+        #print(senddata)
+
+        res = s.recv(BUFSIZE)
+        if res[9] == 0 and res[10] == 0:
+            data = res[11:]
+            return data
+        else:
+            return None
 
     def write(self, memaddr, writedata, bitSize = 0):
         if bitSize > 0:
@@ -394,10 +431,10 @@ if __name__ == "__main__":
 
     # example
     # set IPAddress,Port
-    mcp = MCProtcol3E('192.168.0.41', 4999)
+    mcp = MCProtcol3E('192.168.250.41', 4999)
 
     # words
-    data = mcp.read('D10000', 2)
+    data = mcp.readTCP('D10000', 2)
     print(mcp.toInt16(data))        # convert int16
     rcv = mcp.write('D10', data)
     print(rcv)                      # normal recieve = 0x00 0x00
@@ -432,7 +469,8 @@ if __name__ == "__main__":
     print(mcp.toInt32(rcv[8:]))
     
     # Monitor
-    data = mcp.MonitorSet('D50, D55', 'D60, D64')
+    rcv = mcp.MonitorSet('D50, D55', 'D60, D64')
+    print(rcv)
     rcv = mcp.MonitorGet()
     print(mcp.toInt16(rcv[:4]))
     print(mcp.toInt32(rcv[4:]))
