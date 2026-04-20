@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/mcprotocol/__init__.py
+src/mcprotocol/mcp.py
+src/mcprotocol_udp.egg-info/PKG-INFO
+src/mcprotocol_udp.egg-info/SOURCES.txt
+src/mcprotocol_udp.egg-info/dependency_links.txt
+src/mcprotocol_udp.egg-info/top_level.txt

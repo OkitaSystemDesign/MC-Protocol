@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: mcprotocol-udp
+Version: 0.1.1
+Summary: MITSUBISHI MC-Protocol Frame3E UDP/IP communication library
+Author: Okita Systam Design
+Project-URL: Homepage, https://github.com/OkitaSystemDesign/mcprotocol
+Project-URL: Repository, https://github.com/OkitaSystemDesign/mcprotocol
+Keywords: PLC,MITSUBISHI,MC-Protocol,UDP,industrial
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
 # MITSUBISHI MC-Protocol Frame3E UDP/IP communication library
 三菱 シーケンサの通信プロトコル MCプロトコル を使ってPythonからデバイスの値を読み書きする
 

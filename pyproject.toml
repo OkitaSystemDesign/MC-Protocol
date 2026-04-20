@@ -1,0 +1,31 @@
+[project]
+name = "mcprotocol-udp"
+version = "0.1.1"
+description = "MITSUBISHI MC-Protocol Frame3E UDP/IP communication library"
+readme = "README.md"
+authors = [{ name = "Okita Systam Design" }]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+
+dependencies = []
+
+keywords = ["PLC", "MITSUBISHI", "MC-Protocol", "UDP", "industrial"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/OkitaSystemDesign/mcprotocol"
+Repository = "https://github.com/OkitaSystemDesign/mcprotocol"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
